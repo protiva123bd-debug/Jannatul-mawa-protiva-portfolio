@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jannatul Mawa Protiva | Portfolio</title>
+<meta name="description" content="Portfolio of Jannatul Mawa Protiva, a Computer Science student at Pacific States University.">
+<style>
+  :root {
+    --navy: #17304f;
+    --teal: #1aa6a6;
+    --gold: #e3a008;
+    --sky: #e6f0fa;
+    --card: #f5f8fc;
+    --ink: #2b3440;
+    --muted: #5c6b7d;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.6;
+  }
+  a { color: var(--teal); }
+  .skip {
+    position: absolute; left: -999px; top: 8px;
+    background: var(--gold); color: #000; padding: 8px 14px; border-radius: 6px; z-index: 100;
+  }
+  .skip:focus { left: 8px; }
+
+  /* ---------- header / nav ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--navy); color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  }
+  .bar {
+    max-width: 1040px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand { font-weight: 800; letter-spacing: .04em; color: var(--white); text-decoration: none; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 22px; }
+  nav a { color: #cfe3f7; text-decoration: none; font-weight: 600; font-size: .95rem; padding: 6px 2px; border-bottom: 2px solid transparent; }
+  nav a:hover, nav a:focus-visible { color: var(--white); border-bottom-color: var(--gold); outline: none; }
+  .menu-btn {
+    display: none; background: transparent; border: 2px solid #cfe3f7; color: var(--white);
+    border-radius: 8px; padding: 6px 12px; font-size: 1rem; cursor: pointer;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #24527f 100%);
+    color: var(--white); padding: 70px 20px 80px; position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -80px; top: -80px; width: 320px; height: 320px;
+    border-radius: 50%; background: rgba(26,166,166,.25);
+  }
+  .hero::before {
+    content: ""; position: absolute; left: -60px; bottom: -90px; width: 220px; height: 220px;
+    border-radius: 50%; background: rgba(227,160,8,.22);
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow { color: #9fd8d8; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .8rem; }
+  .hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.1; margin: 10px 0 14px; }
+  .hero p.lead { font-size: 1.15rem; max-width: 620px; color: #dbe9f7; margin: 0 0 26px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 999px; font-weight: 700;
+    text-decoration: none; border: 2px solid transparent; cursor: pointer; font-size: 1rem;
+  }
+  .btn.primary { background: var(--gold); color: #1b1300; }
+  .btn.primary:hover { background: #f0b52a; }
+  .btn.ghost { border-color: #cfe3f7; color: var(--white); background: transparent; }
+  .btn.ghost:hover { background: rgba(255,255,255,.12); }
+
+  /* ---------- sections ---------- */
+  section { padding: 60px 20px; }
+  section.alt { background: var(--sky); }
+  h2 {
+    margin: 0 0 24px; color: var(--navy); font-size: 1.5rem; letter-spacing: .06em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px;
+  }
+  h2::before { content: ""; width: 7px; height: 26px; background: var(--teal); border-radius: 2px; }
+
+  .about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 30px; }
+  .facts { background: var(--white); border-radius: 14px; padding: 20px 22px; box-shadow: 0 4px 16px rgba(23,48,79,.08); }
+  .facts h3 { margin: 0 0 10px; color: var(--navy); font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; }
+  .facts ul { margin: 0; padding-left: 18px; }
+  .facts li { margin: 4px 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .chips li {
+    background: var(--white); color: var(--navy); border: 1px solid #b9cde2; border-radius: 999px;
+    padding: 4px 12px; font-size: .88rem; font-weight: 600;
+  }
+
+
+  /* ---------- experience / education timeline ---------- */
+  .two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; }
+  .two-col h3 { margin: 0 0 16px; color: var(--navy); font-size: 1.05rem; text-transform: uppercase; letter-spacing: .1em; }
+  .timeline { list-style: none; margin: 0 0 8px 8px; padding: 0; border-left: 3px solid var(--teal); }
+  .timeline li { position: relative; padding: 0 0 22px 24px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -11px; top: 4px; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--gold); border: 3px solid var(--sky);
+  }
+  .timeline .when { display: block; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #087070; }
+  .timeline .role { display: block; font-weight: 800; color: var(--navy); font-size: 1.05rem; }
+  .timeline .where { display: block; color: var(--muted); font-style: italic; margin-bottom: 6px; }
+  .timeline ul { margin: 0; padding-left: 18px; }
+  .timeline ul li { padding: 0; margin: 3px 0; }
+  .timeline ul li::before { display: none; }
+  .award { background: var(--white); border-left: 6px solid var(--gold); border-radius: 12px; padding: 12px 16px; margin: 0 0 12px; box-shadow: 0 3px 12px rgba(23,48,79,.07); }
+  .award strong { display: block; color: var(--navy); }
+  .award span { color: var(--muted); font-size: .93rem; }
+
+  /* ---------- skills ---------- */
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .skill-card { background: var(--card); border-radius: 14px; padding: 18px 20px; border-top: 5px solid var(--teal); box-shadow: 0 4px 14px rgba(23,48,79,.08); }
+  .skill-card h3 { margin: 0 0 10px; color: var(--navy); font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; }
+  .skill-card .chips li { background: var(--white); }
+  .lang { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px dashed #c9d6e4; }
+  .lang:last-child { border-bottom: 0; }
+  .lang small { color: var(--muted); display: block; line-height: 1.2; }
+  .dots { color: var(--teal); letter-spacing: 3px; font-size: 1.05rem; white-space: nowrap; }
+  .dots .off { color: #b9cde2; }
+
+  /* ---------- project filter (interactive feature) ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+  .filter {
+    border: 2px solid var(--navy); background: var(--white); color: var(--navy);
+    padding: 8px 18px; border-radius: 999px; font-weight: 700; cursor: pointer; font-size: .95rem;
+  }
+  .filter:hover { background: var(--sky); }
+  .filter[aria-pressed="true"] { background: var(--navy); color: var(--white); }
+  #filter-status { color: var(--muted); margin: 0 0 18px; font-size: .95rem; min-height: 1.5em; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .project {
+    background: var(--card); border-radius: 14px; padding: 20px; border-left: 6px solid var(--teal);
+    box-shadow: 0 4px 14px rgba(23,48,79,.08); display: flex; flex-direction: column;
+  }
+  .project[hidden] { display: none; }
+  .project h3 { margin: 0 0 6px; color: var(--navy); font-size: 1.1rem; }
+  .project p { margin: 0 0 12px; flex: 1; }
+  .tag { display: inline-block; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #087070; margin-bottom: 6px; }
+  .project .links a { font-weight: 700; margin-right: 14px; }
+
+  /* ---------- writing ---------- */
+  .writing { display: grid; gap: 14px; }
+  .writing article { background: var(--white); border-left: 6px solid var(--gold); border-radius: 12px; padding: 14px 18px; box-shadow: 0 3px 12px rgba(23,48,79,.07); }
+  .writing h3 { margin: 0 0 4px; font-size: 1.02rem; color: var(--navy); }
+  .writing p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+
+  /* ---------- university life gallery ---------- */
+  .gallery { column-count: 3; column-gap: 16px; }
+  .gallery figure { margin: 0 0 16px; break-inside: avoid; }
+  .gallery button {
+    display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+    border-radius: 14px; overflow: hidden; box-shadow: 0 4px 14px rgba(23,48,79,.14);
+  }
+  .gallery img { display: block; width: 100%; height: auto; transition: transform .25s ease; }
+  .gallery button:hover img, .gallery button:focus-visible img { transform: scale(1.04); }
+  .gallery button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  dialog#photo-dialog {
+    border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh; overflow: visible;
+  }
+  dialog#photo-dialog::backdrop { background: rgba(10,20,35,.86); }
+  dialog#photo-dialog img { display: block; max-width: 94vw; max-height: 86vh; border-radius: 12px; }
+  .close-photo {
+    display: block; margin: 10px auto 0; background: var(--gold); color: #1b1300; border: 0;
+    padding: 8px 22px; border-radius: 999px; font-weight: 700; font-size: 1rem; cursor: pointer;
+  }
+
+  /* ---------- connect ---------- */
+  .connect { display: flex; flex-wrap: wrap; gap: 12px; }
+  .connect .btn.primary { background: var(--teal); color: var(--white); }
+  .connect .btn.primary:hover { background: #148b8b; }
+  .connect .btn.outline { border-color: var(--navy); color: var(--navy); }
+  .connect .btn.outline:hover { background: var(--navy); color: var(--white); }
+
+  footer { background: var(--navy); color: #cfe3f7; text-align: center; padding: 26px 20px; font-size: .92rem; }
+  footer a { color: #9fd8d8; font-weight: 700; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 720px) {
+    .menu-btn { display: inline-block; }
+    nav { position: absolute; left: 0; right: 0; top: 100%; background: var(--navy); display: none; }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; gap: 0; padding: 8px 20px 16px; }
+    nav a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .about-grid, .two-col { grid-template-columns: 1fr; }
+    .gallery { column-count: 2; column-gap: 12px; }
+    .hero { padding: 50px 20px 60px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top">JANNATUL M. PROTIVA</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#university-life">University life</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div class="eyebrow">Computer Science Student</div>
+      <h1>Hi, I'm Jannatul Mawa Protiva.</h1>
+      <p class="lead">I study Computer Science at Pacific States University in Los Angeles. I build small, useful web tools, write research papers, and speak five languages.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn ghost" href="Jannatul_Mawa_Protiva_Resume.pdf" target="_blank" rel="noopener">Download Résumé (PDF)</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <div class="about-grid">
+        <div>
+          <p>I am an international student from Bangladesh, now studying Computer Science in the United States. I like turning everyday problems into simple web tools: a daily sales tracker for small shops, a call planner for different time zones, and games for study breaks.</p>
+          <p>Before college I worked in sales and customer service, led a team as captain in an international English-language competition, and took part in national math and biology olympiads. Those experiences taught me to listen, explain clearly, and keep learning.</p>
+          <ul class="chips" aria-label="Skills">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>GitHub Pages</li><li>Research writing</li><li>Customer service</li>
+          </ul>
+        </div>
+        <aside class="facts">
+          <h3>Quick facts</h3>
+          <ul>
+            <li>Studying: B.S. Computer Science</li>
+            <li>School: Pacific States University</li>
+            <li>Based in: Los Angeles area, CA</li>
+            <li>Languages: Bangla, English, Hindi, Urdu, Spanish</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="alt">
+    <div class="wrap">
+      <h2>Experience &amp; education</h2>
+      <div class="two-col">
+        <div>
+          <h3>Work experience</h3>
+          <ul class="timeline">
+            <li>
+              <span class="when">2024 &ndash; Present</span>
+              <span class="role">Salesperson</span>
+              <span class="where">Modern Tech &middot; Phone Shop</span>
+              <ul>
+                <li>Helped diverse customers find the right phones and accessories.</li>
+                <li>Demonstrated products and explained features, contributing to increased sales and customer satisfaction.</li>
+                <li>Built strong relationships that fostered loyalty and repeat business.</li>
+              </ul>
+            </li>
+            <li>
+              <span class="when">Mar 2023 &ndash; Oct 2023</span>
+              <span class="role">Customer Service Representative</span>
+              <span class="where">Bangladesh</span>
+              <ul>
+                <li>Assisted customers with questions, requests, and complaints, providing clear and courteous service.</li>
+                <li>Resolved issues promptly and passed complex cases to the right team.</li>
+              </ul>
+            </li>
+            <li>
+              <span class="when">2022 &ndash; 2023</span>
+              <span class="role">Assistant</span>
+              <span class="where">Bloom House By Laila &middot; Clothing Store</span>
+              <ul>
+                <li>Managed inventory, order fulfillment, and customer service.</li>
+                <li>Handled multiple tasks at once in a fast-paced environment.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Education</h3>
+          <ul class="timeline">
+            <li>
+              <span class="when">Expected 2028</span>
+              <span class="role">B.S. Computer Science</span>
+              <span class="where">Pacific States University, Los Angeles, CA</span>
+            </li>
+            <li>
+              <span class="when">2021 &ndash; 2022</span>
+              <span class="role">Higher Secondary Certificate (Science)</span>
+              <span class="where">Viqarunnisa Noon School and College, Dhaka</span>
+            </li>
+            <li>
+              <span class="when">2020 &ndash; 2021</span>
+              <span class="role">Secondary School Certificate</span>
+              <span class="where">Viqarunnisa Noon School and College, Dhaka</span>
+            </li>
+          </ul>
+          <h3>Awards &amp; competitions</h3>
+          <div class="award"><strong>Bakeman's 2nd International Language League</strong><span>Team captain, first runner-up &middot; Nov 2023</span></div>
+          <div class="award"><strong>Bangladesh Mathematical Olympiad</strong><span>Selected for the national level &middot; 2022</span></div>
+          <div class="award"><strong>Bangladesh Biology Olympiad</strong><span>National participant</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <h3>Web &amp; programming</h3>
+          <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Python</li><li>Java</li><li>C++</li><li>SQL</li></ul>
+        </div>
+        <div class="skill-card">
+          <h3>Tools</h3>
+          <ul class="chips"><li>Git / GitHub</li><li>VS Code</li><li>Excel</li><li>Office 365</li><li>Google Workspace</li><li>Linux basics</li></ul>
+        </div>
+        <div class="skill-card">
+          <h3>People skills</h3>
+          <ul class="chips"><li>Communication</li><li>Leadership</li><li>Teamwork</li><li>Time management</li><li>Customer service</li><li>Research writing</li></ul>
+        </div>
+        <div class="skill-card">
+          <h3>Languages</h3>
+          <div class="lang"><div>Bangla<small>Native</small></div><span class="dots" aria-label="5 out of 5">●●●●●<span class="off"></span></span></div>
+          <div class="lang"><div>English<small>Fluent</small></div><span class="dots" aria-label="5 out of 5">●●●●●<span class="off"></span></span></div>
+          <div class="lang"><div>Hindi<small>Fluent</small></div><span class="dots" aria-label="4 out of 5">●●●●<span class="off">●</span></span></div>
+          <div class="lang"><div>Urdu<small>Conversational</small></div><span class="dots" aria-label="3 out of 5">●●●<span class="off">●●</span></span></div>
+          <div class="lang"><div>Spanish<small>Conversational</small></div><span class="dots" aria-label="3 out of 5">●●●<span class="off">●●</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="alt">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <!-- INTERACTIVE FEATURE: project filter. The code is in the <script> at the bottom of this file. -->
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" data-filter="tool" aria-pressed="false">Tools</button>
+        <button class="filter" data-filter="game" aria-pressed="false">Games</button>
+        <button class="filter" data-filter="site" aria-pressed="false">Websites</button>
+      </div>
+      <p id="filter-status" aria-live="polite"></p>
+
+      <div class="grid">
+        <article class="project" data-category="site">
+          <span class="tag">Website</span>
+          <h3>Personal Portfolio</h3>
+          <p>My first portfolio site, with light and dark themes, an accessible skip link, and a layout that adapts to phones.</p>
+          <div class="links"><a href="https://protiva123bd-debug.github.io/portfolio" target="_blank" rel="noopener">Visit site</a></div>
+        </article>
+        <article class="project" data-category="tool">
+          <span class="tag">Tool</span>
+          <h3>Daybook: Sales &amp; Profit Tracker</h3>
+          <p>Lets a small business log daily sales, costs, and wages, then shows profit by day, week, and month with a 14-day chart.</p>
+          <div class="links"><a href="https://protiva123bd-debug.github.io/blue-door-kitchin-daybook" target="_blank" rel="noopener">Visit site</a></div>
+        </article>
+        <article class="project" data-category="game">
+          <span class="tag">Game</span>
+          <h3>Playbreak: Study Break Games</h3>
+          <p>A mini game site with a memory-match game that tracks moves, time, and your best score.</p>
+          <div class="links"><a href="https://protiva123bd-debug.github.io/playbreak" target="_blank" rel="noopener">Visit site</a></div>
+        </article>
+        <article class="project" data-category="tool">
+          <span class="tag">Tool</span>
+          <h3>Homeclock: Call Planner</h3>
+          <p>Compares two time zones and tells you whether it is a good time to call, based on waking hours and daylight saving.</p>
+          <div class="links"><a href="https://protiva123bd-debug.github.io/homelock" target="_blank" rel="noopener">Visit site</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="wrap">
+      <h2>Research &amp; writing</h2>
+      <div class="writing">
+        <article>
+          <h3>Studying and Working: Work Rights for International Students</h3>
+          <p>Research essay arguing that allowing international students to work benefits students, home countries, and the U.S.</p>
+        </article>
+        <article>
+          <h3>U.S. Tariffs on Chinese Imports: Help or Harm?</h3>
+          <p>Research proposal weighing protectionism against free trade.</p>
+        </article>
+        <article>
+          <h3>Slow Observation in Museums</h3>
+          <p>Research paper on how sustained viewing of art shapes attention, emotion, and empathy.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="university-life">
+    <div class="wrap">
+      <h2>University life</h2>
+      <p>Friends, campus events, and weekend adventures from my life as a student in Los Angeles. Tap a photo to see it larger.</p>
+      <div class="gallery">
+        <figure><button type="button" class="photo-btn" data-src="images/uni-01.jpg" data-alt="Two friends smiling and giving thumbs up in a mirror selfie"><img src="images/uni-01.jpg" alt="Two friends smiling and giving thumbs up in a mirror selfie" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-02.jpg" data-alt="Three friends taking a selfie outdoors on campus in the evening light"><img src="images/uni-02.jpg" alt="Three friends taking a selfie outdoors on campus in the evening light" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-03.jpg" data-alt="Two friends smiling and giving thumbs up at a busy campus event"><img src="images/uni-03.jpg" alt="Two friends smiling and giving thumbs up at a busy campus event" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-04.jpg" data-alt="Five friends taking a night selfie in front of a lit-up stage and palm trees"><img src="images/uni-04.jpg" alt="Five friends taking a night selfie in front of a lit-up stage and palm trees" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-05.jpg" data-alt="Three friends posing with open arms at night near a campus pond"><img src="images/uni-05.jpg" alt="Three friends posing with open arms at night near a campus pond" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-06.jpg" data-alt="Three friends smiling in a selfie wearing harnesses outdoors under trees"><img src="images/uni-06.jpg" alt="Three friends smiling in a selfie wearing harnesses outdoors under trees" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-07.jpg" data-alt="Three friends taking a selfie in front of giant inflatable Halloween decorations"><img src="images/uni-07.jpg" alt="Three friends taking a selfie in front of giant inflatable Halloween decorations" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-08.jpg" data-alt="Two friends from behind, hiking and making peace signs in front of mountains"><img src="images/uni-08.jpg" alt="Two friends from behind, hiking and making peace signs in front of mountains" loading="lazy"></button></figure>
+        <figure><button type="button" class="photo-btn" data-src="images/uni-09.jpg" data-alt="Two friends in a mirror selfie holding birthday balloons"><img src="images/uni-09.jpg" alt="Two friends in a mirror selfie holding birthday balloons" loading="lazy"></button></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="connect" class="alt">
+    <div class="wrap">
+      <h2>Connect</h2>
+      <p>Want to talk about a project, an internship, or a collaboration? Reach out.</p>
+      <div class="connect">
+        <a class="btn primary" href="mailto:p26140@psuca.edu">Email me</a>
+        <a class="btn outline" href="Jannatul_Mawa_Protiva_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+        <a class="btn outline" href="https://github.com/protiva123bd-debug" target="_blank" rel="noopener">GitHub profile</a>
+        <!-- ADD YOUR SOCIAL MEDIA PROFILE HERE (the rubric wants a profile you own), for example:
+        <a class="btn outline" href="https://www.linkedin.com/in/YOUR-NAME" target="_blank" rel="noopener">LinkedIn</a> -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Jannatul Mawa Protiva &middot;
+    <a href="https://github.com/protiva123bd-debug/portfolio" target="_blank" rel="noopener">View source code on GitHub</a></p>
+</footer>
+
+<dialog id="photo-dialog" aria-label="Photo viewer">
+  <img id="photo-large" alt="">
+  <button type="button" class="close-photo" id="close-photo">Close</button>
+</dialog>
+
+<script>
+  /* ============================================================
+     INTERACTIVE FEATURE 1: Project filter
+     - filterProjects() is the function.
+     - The for...of loop visits every project card.
+     - The if statement decides whether each card is shown or hidden.
+     ============================================================ */
+  function filterProjects(category) {
+    const cards = document.querySelectorAll(".project");
+    let shown = 0;
+
+    for (const card of cards) {                              // LOOP over every card
+      const categories = card.dataset.category.split(" ");
+      if (category === "all" || categories.includes(category)) {   // CONDITIONAL
+        card.hidden = false;
+        shown++;
+      } else {
+        card.hidden = true;
+      }
+    }
+
+    const status = document.getElementById("filter-status");
+    if (shown === 0) {
+      status.textContent = "No projects in this category yet.";
+    } else if (shown === 1) {
+      status.textContent = "Showing 1 project.";
+    } else {
+      status.textContent = "Showing " + shown + " projects.";
+    }
+  }
+
+  // Connect the filter buttons to the function
+  const filterButtons = document.querySelectorAll(".filter");
+  for (const button of filterButtons) {
+    button.addEventListener("click", function () {
+      for (const other of filterButtons) {
+        other.setAttribute("aria-pressed", other === button ? "true" : "false");
+      }
+      filterProjects(button.dataset.filter);
+    });
+  }
+  filterProjects("all");   // run once when the page loads
+
+  /* ============================================================
+     Mobile menu: opens and closes the navigation on small screens
+     ============================================================ */
+  const menuButton = document.getElementById("menu-btn");
+  const nav = document.getElementById("nav");
+
+  function toggleMenu() {
+    const open = nav.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  menuButton.addEventListener("click", toggleMenu);
+  for (const link of nav.querySelectorAll("a")) {
+    link.addEventListener("click", function () {
+      if (nav.classList.contains("open")) toggleMenu();
+    });
+  }
+
+  /* ============================================================
+     University life gallery: tap a photo to open it larger
+     ============================================================ */
+  const photoDialog = document.getElementById("photo-dialog");
+  const photoLarge = document.getElementById("photo-large");
+
+  function openPhoto(src, alt) {
+    photoLarge.src = src;
+    photoLarge.alt = alt;
+    if (typeof photoDialog.showModal === "function") {
+      photoDialog.showModal();
+    } else {
+      window.open(src, "_blank");   // older browsers: open the image in a new tab
+    }
+  }
+  for (const btn of document.querySelectorAll(".photo-btn")) {
+    btn.addEventListener("click", function () { openPhoto(btn.dataset.src, btn.dataset.alt); });
+  }
+  document.getElementById("close-photo").addEventListener("click", function () { photoDialog.close(); });
+  photoDialog.addEventListener("click", function (e) { if (e.target === photoDialog) photoDialog.close(); });
+</script>
+</body>
+</html>
